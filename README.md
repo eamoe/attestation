@@ -37,6 +37,8 @@ mv pets man_friends
 
 ### Решение
 
+Используемые команды:
+
 ```sh
 mkdir animals
 
