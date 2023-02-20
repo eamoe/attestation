@@ -21,6 +21,7 @@
 
 Используемые команды:
 
+```sh
 cat > pets
 
 cat > pack_animals
@@ -30,14 +31,17 @@ cat pack_animals >> pets
 cat pets
 
 mv pets man_friends
+```
 
 2. Создать директорию, переместить туда файл.
 
 ### Решение
 
+```sh
 mkdir animals
 
 mv man_friends animals/man_friends
+```
 
 3. Подключить дополнительный репозиторий MySQL. Установить любой пакет из этого репозитория.
 4. Установить и удалить deb-пакет с помощью dpkg.
