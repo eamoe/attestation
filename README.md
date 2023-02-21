@@ -190,6 +190,8 @@ VALUES 	ROW("dog1", '2010-01-01', 'dogs'),
     	ROW("hamster3", '2012-01-01', 'hamsters');
 ```
 
+Добавляем данные в таблицу pack_animals:
+
 ```sql
 INSERT INTO pack_animals (name, birthdate, pack_animals.group)
 VALUES 	ROW("horse1", '2010-01-01', 'horses'),
@@ -201,6 +203,22 @@ VALUES 	ROW("horse1", '2010-01-01', 'horses'),
 	ROW("donkey1", '2010-01-01', 'donkeys'),
 	ROW("donkey2", '2011-01-01', 'donkeys'),
 	ROW("donkey3", '2012-01-01', 'donkeys');
+```
+
+Добавляем данные в таблицу commands:
+
+```sql
+
+INSERT INTO commands(pet_id, command_name)
+VALUES 	ROW(1, 'command1'),
+	ROW(1, 'command2'),
+	ROW(2, 'command1'),
+	ROW(1, 'command3'),
+	ROW(3, 'command3'),
+	ROW(4, 'command1'),
+	ROW(5, 'command4'),
+	ROW(8, 'command5');
+
 ```
 
 ## Задание 10
