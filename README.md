@@ -52,7 +52,8 @@ mv man_friends animals/man_friends
 
 ### Решение
 
-Скачиваем репозиторий с https://dev.mysql.com/downloads/repo/apt/ и перемещаем его в папку с проектом.
+Скачиваем репозиторий [отсюда](https://dev.mysql.com/downloads/repo/apt/)
+и перемещаем его в папку с проектом.
 
 Запускаем команду установки:
 
@@ -69,6 +70,8 @@ sudo apt-get update
 ## Задание 4
 
 Установить и удалить deb-пакет с помощью dpkg.
+
+### Решение
 
 Устанавливаем пакет mysql-server:
 
