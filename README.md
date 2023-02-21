@@ -135,6 +135,40 @@ CREATE DATABASE man_friends_db;
 
 Создать таблицы с иерархией из диаграммы в БД.
 
+### Решение
+
+Создаем таблицу с домашними животными:
+
+```sql
+CREATE TABLE `pets` (
+	`ID` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+	`name` VARCHAR(45) NULL,
+	`birthdate` DATE NOT NULL,
+	`group` VARCHAR(20) NULL,
+	PRIMARY KEY (`ID`));
+```
+
+Создаем таблицу с вьючными животными:
+
+```sql
+CREATE TABLE `pack_animals` (
+        `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+        `name` VARCHAR(45) NULL,
+        `birthdate` DATE NOT NULL,
+        `group` VARCHAR(20) NULL,
+        PRIMARY KEY (`ID`));
+```
+
+Создаем отдельную таблицу с командами:
+
+```sql
+CREATE TABLE `commands` (
+        `ID` INT UNSIGNED NOT NULL AUTO_INCREMENT, 
+        `pet_id`  INT UNSIGNED NOT NULL,
+        `command_name` VARCHAR(45) NOT NULL,
+        PRIMARY KEY (`ID`));
+```
+
 ## Задание 9
 
 Заполнить низкоуровневые таблицы именами (животных), командами, которые они выполняют и датами рождения.
