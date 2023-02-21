@@ -190,6 +190,19 @@ VALUES 	ROW("dog1", '2010-01-01', 'dogs'),
     	ROW("hamster3", '2012-01-01', 'hamsters');
 ```
 
+```sql
+INSERT INTO pack_animals (name, birthdate, pack_animals.group)
+VALUES 	ROW("horse1", '2010-01-01', 'horses'),
+	ROW("horse2", '2011-01-01', 'horses'),
+	ROW("horse3", '2012-01-01', 'horses'),
+	ROW("camel1", '2010-01-01', 'camels'),
+	ROW("camel2", '2011-01-01', 'camels'),
+	ROW("camel3", '2012-01-01', 'camels'),
+	ROW("donkey1", '2010-01-01', 'donkeys'),
+	ROW("donkey2", '2011-01-01', 'donkeys'),
+	ROW("donkey3", '2012-01-01', 'donkeys');
+```
+
 ## Задание 10
 
 Удалить из таблицы верблюдов, т.к. верблюдов решили перевезти в другой питомник на зимовку.
