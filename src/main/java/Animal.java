@@ -33,9 +33,12 @@ public class Animal {
     }
 
     public void showCommands() {
-        System.out.println(this.name + " knows the following commands:");
-        for (String command : commands) {
-            System.out.println(command);
+        System.out.print(this.name + " knows the following commands: ");
+        if (this.commands.isEmpty()) {
+            System.out.println("No Commands");
+        }
+        else {
+            System.out.println(this.commands);
         }
     }
 
@@ -49,4 +52,5 @@ public class Animal {
         System.out.println("Name: " + this.name);
         System.out.println("Age: " + this.age());
     }
+
 }
