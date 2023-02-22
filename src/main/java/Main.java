@@ -23,7 +23,6 @@ public class Main {
         animals.add(cat1);
         animals.add(cat2);
 
-
         for (Animal animal : animals) {
             animal.generalInfo();
             animal.showCommands();
