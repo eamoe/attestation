@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Animal {
@@ -5,9 +6,12 @@ public class Animal {
     private String name;
     private Date birthdate;
 
+    private ArrayList<String> commands;
+
     public Animal(String name, Date birthdate) {
         this.name = name;
         this.birthdate = birthdate;
+        this.commands = new ArrayList<>();
     }
 
     public String name() {
@@ -26,4 +30,15 @@ public class Animal {
         this.birthdate = birthdate;
     }
 
+    public void showCommands() {
+        System.out.println(this.name() + " knows the following commands:");
+        for (String command : commands) {
+            System.out.println(command);
+        }
+    }
+
+    public void learnCommand(String command) {
+        this.commands.add(command);
+        System.out.println(this.name + " has learned a new command.");
+    }
 }
