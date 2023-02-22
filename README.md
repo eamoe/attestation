@@ -267,6 +267,21 @@ CREATE TEMPORARY TABLE young_animals
 
 Объединить все таблицы в одну, при этом сохраняя поля, указывающие на прошлую принадлежность к старым таблицам.
 
+### Решение
+
+Создаем новую временую таблицу animals. Привязку к старой таблице реализуем посредством добавления поля с указанием имени родительской таблицы.
+
+```sql
+
+CREATE TEMPORARY TABLE animals
+	SELECT id, pets.name, birthdate, pets.group, 'pets' AS parent_table
+    	FROM pets
+	UNION
+    	SELECT id, pack_animals.name, birthdate, pack_animals.group, 'pack_animals' AS parent_table
+    	FROM pack_animals;
+
+```
+
 ## Задание 13
 
 Создать класс с инкапсуляцией методов и наследованием по диаграмме.
