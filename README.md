@@ -244,6 +244,25 @@ WHERE pack_animals.group = "camels";
 Создать новую таблицу “Молодые животные”, в которую попадут все животные старше 1 года, но младше 3 лет
 и в отдельном столбце с точностью до месяца подсчитать возраст животных в новой таблице.
 
+### Решение
+
+Создаем новую временную таблицу. Добавляем вычисляемое поле, которое содержит возраст животного в месяцах. 
+
+```sql
+
+CREATE TEMPORARY TABLE young_animals
+	SELECT id, pets.name, birthdate, pets.group, TIMESTAMPDIFF(month, birthdate, now()) AS age_months
+    	FROM pets
+	WHERE TIMESTAMPDIFF(month, birthdate, now()) >= 12
+		AND TIMESTAMPDIFF(month, birthdate, now()) < 36
+	UNION
+    	SELECT id, pack_animals.name, birthdate, pack_animals.group, TIMESTAMPDIFF(month, birthdate, now()) AS age_months
+    	FROM pets
+	WHERE TIMESTAMPDIFF(month, birthdate, now()) >= 12
+		AND TIMESTAMPDIFF(month, birthdate, now()) < 36;
+
+```
+
 ## Задание 12
 
 Объединить все таблицы в одну, при этом сохраняя поля, указывающие на прошлую принадлежность к старым таблицам.
