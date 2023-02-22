@@ -45,7 +45,7 @@ public class Animal {
 
     public void learnCommand(String command) {
         this.commands.add(command);
-        System.out.println(this.name + " has learned a new command.");
+        System.out.println(this.name + " has learned \"" + command + "\" command.");
     }
 
     public void generalInfo() {
