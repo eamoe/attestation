@@ -1,18 +1,19 @@
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Animal {
 
     private String name;
-    private Date birthdate;
+    private LocalDate birthdate;
 
-    private ArrayList<String> commands;
+    private final ArrayList<String> commands = new ArrayList<>();
 
-    public Animal(String name, Date birthdate) {
+    public Animal(String name, LocalDate birthdate) {
         this.name = name;
         this.birthdate = birthdate;
-        this.commands = new ArrayList<>();
     }
 
     public String name() {
@@ -24,11 +25,13 @@ public class Animal {
     }
 
     public String age() {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-        return dateFormat.format(this.birthdate);
+        Period period = Period.between(this.birthdate, LocalDate.now());
+        return period.getYears() + " year(s) "
+                + period.getMonths() + " month(s) "
+                + period.getDays() + " day(s).";
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(LocalDate birthdate) {
         this.birthdate = birthdate;
     }
 
