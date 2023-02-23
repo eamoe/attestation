@@ -65,7 +65,7 @@ public class Main {
         {
             System.out.print("Enter animal name: ");
             String name = scanner.next();
-            System.out.print("Enter animal birthdate: ");
+            System.out.print("Enter animal birthdate (format: yyyy-MM-dd): ");
             LocalDate birthdate = LocalDate.parse(scanner.next());
 
             switch (animalCategory) {
@@ -125,8 +125,22 @@ public class Main {
         }
     }
 
-    static void option4() {
-        System.out.println("Thanks for choosing option 4");
+    static void showLearnedCommands(HashSet<Animal> zoo) {
+        System.out.println("For which animal you'd like to see the list of commands?");
+        for (Animal animal : zoo) {
+            System.out.print(animal.name() + " ");
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\nEnter animal's name: ");
+        String name = scanner.next();
+
+        for (Animal animal : zoo) {
+            if (animal.name().equals(name)) {
+                animal.showCommands();
+                break;
+            }
+        }
     }
 
     static void run(String[] options, HashSet<Animal> zoo) {
@@ -140,7 +154,7 @@ public class Main {
                     case 1 -> addAnimalToZoo(zoo);
                     case 2 -> showAnimals(zoo);
                     case 3 -> teachNewCommand(zoo);
-                    case 4 -> option4();
+                    case 4 -> showLearnedCommands(zoo);
                     case 5 -> exit(0);
                 }
             } catch (InputMismatchException ex) {
