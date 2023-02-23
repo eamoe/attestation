@@ -1,10 +1,20 @@
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+import static java.lang.System.exit;
 
 public class Main {
 
     public static void main(String[] args) {
 
+        NavigationMenu menu = new NavigationMenu();
+        menu.run();
+        int option = 0;
+
+
+        /*
         HashSet<Animal> animals = new HashSet<>();
 
         Dog dog1 = new Dog("Dog1", LocalDate.of(2020, 1, 11));
@@ -27,7 +37,7 @@ public class Main {
             animal.generalInfo();
             animal.showCommands();
         }
-
+    */
     }
 
 }
