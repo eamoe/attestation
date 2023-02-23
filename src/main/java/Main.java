@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -14,11 +16,11 @@ public class Main {
                 "5 - Exit"
         };
 
-        run(options);
+        HashSet<Animal> zoo = new HashSet<>();
+
+        run(options, zoo);
 
         /*
-        HashSet<Animal> animals = new HashSet<>();
-
         Dog dog1 = new Dog("Dog1", LocalDate.of(2020, 1, 11));
         Dog dog2 = new Dog("Dog2", LocalDate.of(2021, 5, 17));
         Cat cat1 = new Cat("Cat1", LocalDate.of(2022, 7, 5));
@@ -49,12 +51,56 @@ public class Main {
         System.out.print("Choose an option: ");
     }
 
-    static void option1() {
-        System.out.println("Thanks for choosing option 1");
+    static void addAnimalToZoo(HashSet<Animal> zoo) {
+        System.out.println("Which animal would you like to add?");
+        System.out.println("Please type: dog, cat, horse, or camel");
+        String animalCategory;
+        Scanner scanner = new Scanner(System.in);
+        animalCategory = scanner.next().toLowerCase();
+        if (animalCategory.equals("dog")
+         || animalCategory.equals("cat")
+         || animalCategory.equals("horse")
+         || animalCategory.equals("camel"))
+        {
+            System.out.print("Enter animal name: ");
+            String name = scanner.next();
+            System.out.print("Enter animal birthdate: ");
+            LocalDate birthdate = LocalDate.parse(scanner.next());
+
+            switch (animalCategory) {
+                case "dog":
+                    Dog dog = new Dog(name, birthdate);
+                    zoo.add(dog);
+                    break;
+                case "cat":
+                    Cat cat = new Cat(name, birthdate);
+                    zoo.add(cat);
+                    break;
+                case "horse":
+                    Horse horse = new Horse(name, birthdate);
+                    zoo.add(horse);
+                    break;
+                case "camel":
+                    Camel camel = new Camel(name, birthdate);
+                    zoo.add(camel);
+                    break;
+            }
+
+            System.out.println(animalCategory + " was added to the zoo!");
+
+        }
+        else {
+            System.out.println(animalCategory + " doesn't exists in registry!");
+        }
+
     }
 
-    static void option2() {
-        System.out.println("Thanks for choosing option 2");
+    static void showAnimals(HashSet<Animal> zoo) {
+        System.out.println("In the zoo, there are the following animals:");
+        for (Animal animal : zoo) {
+            animal.generalInfo();
+            animal.showCommands();
+        }
     }
 
     static void option3() {
@@ -65,15 +111,16 @@ public class Main {
         System.out.println("Thanks for choosing option 4");
     }
 
-    static void run(String[] options) {
+    static void run(String[] options, HashSet<Animal> zoo) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
+            System.out.println("Navigation menu".toUpperCase());
             printMenu(options);
             try {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 -> option1();
-                    case 2 -> option2();
+                    case 1 -> addAnimalToZoo(zoo);
+                    case 2 -> showAnimals(zoo);
                     case 3 -> option3();
                     case 4 -> option4();
                     case 5 -> exit(0);
