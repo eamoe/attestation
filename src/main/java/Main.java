@@ -48,6 +48,7 @@ public class Main {
         for (String option : options){
             System.out.println(option);
         }
+        System.out.println("----------");
         System.out.print("Choose an option: ");
     }
 
@@ -101,10 +102,27 @@ public class Main {
             animal.generalInfo();
             animal.showCommands();
         }
+        System.out.println("-----------");
     }
 
-    static void option3() {
-        System.out.println("Thanks for choosing option 3");
+    static void teachNewCommand(HashSet<Animal> zoo) {
+        System.out.println("Which animal you'd like to teach a new command?");
+        for (Animal animal : zoo) {
+            System.out.print(animal.name() + " ");
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\nEnter animal's name: ");
+        String name = scanner.next();
+
+        for (Animal animal : zoo) {
+            if (animal.name().equals(name)) {
+                System.out.print("Type a new command: ");
+                String command = scanner.next();
+                animal.learnCommand(command);
+                break;
+            }
+        }
     }
 
     static void option4() {
@@ -121,16 +139,14 @@ public class Main {
                 switch (option) {
                     case 1 -> addAnimalToZoo(zoo);
                     case 2 -> showAnimals(zoo);
-                    case 3 -> option3();
+                    case 3 -> teachNewCommand(zoo);
                     case 4 -> option4();
                     case 5 -> exit(0);
                 }
-            }
-            catch (InputMismatchException ex) {
+            } catch (InputMismatchException ex) {
                 System.out.println("Please enter correct value!");
                 scanner.next();
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 System.out.println("An unexpected error happened. Please try again!");
                 scanner.next();
             }
