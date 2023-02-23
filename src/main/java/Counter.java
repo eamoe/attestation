@@ -1,5 +1,3 @@
-import java.io.Closeable;
-
 public class Counter implements AutoCloseable {
 
     private static int counter;
