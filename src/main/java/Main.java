@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.InputMismatchException;
@@ -7,7 +8,7 @@ import static java.lang.System.exit;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         String[] options = {
                 "1 - Add a new animal to the Zoo",
                 "2 - Show all animals in the Zoo",
@@ -20,28 +21,6 @@ public class Main {
 
         run(options, zoo);
 
-        /*
-        Dog dog1 = new Dog("Dog1", LocalDate.of(2020, 1, 11));
-        Dog dog2 = new Dog("Dog2", LocalDate.of(2021, 5, 17));
-        Cat cat1 = new Cat("Cat1", LocalDate.of(2022, 7, 5));
-        Cat cat2 = new Cat("Cat2", LocalDate.of(2023, 8, 11));
-
-        dog1.learnCommand("Sit Down");
-        dog1.learnCommand("Lay Down");
-        dog2.learnCommand("Stand Up");
-        dog2.learnCommand("Voice");
-        cat1.learnCommand("Bring");
-
-        animals.add(dog1);
-        animals.add(dog2);
-        animals.add(cat1);
-        animals.add(cat2);
-
-        for (Animal animal : animals) {
-            animal.generalInfo();
-            animal.showCommands();
-        }
-    */
     }
 
     static void printMenu(String[] options) {
@@ -52,7 +31,7 @@ public class Main {
         System.out.print("Choose an option: ");
     }
 
-    static void addAnimalToZoo(HashSet<Animal> zoo) {
+    static void addAnimalToZoo(HashSet<Animal> zoo, Counter counter) {
         System.out.println("Which animal would you like to add?");
         System.out.println("Please type: dog, cat, horse, or camel");
         String animalCategory;
@@ -69,25 +48,26 @@ public class Main {
             LocalDate birthdate = LocalDate.parse(scanner.next());
 
             switch (animalCategory) {
-                case "dog":
+                case "dog" -> {
                     Dog dog = new Dog(name, birthdate);
                     zoo.add(dog);
-                    break;
-                case "cat":
+                }
+                case "cat" -> {
                     Cat cat = new Cat(name, birthdate);
                     zoo.add(cat);
-                    break;
-                case "horse":
+                }
+                case "horse" -> {
                     Horse horse = new Horse(name, birthdate);
                     zoo.add(horse);
-                    break;
-                case "camel":
+                }
+                case "camel" -> {
                     Camel camel = new Camel(name, birthdate);
                     zoo.add(camel);
-                    break;
+                }
             }
 
             System.out.println(animalCategory + " was added to the zoo!");
+            counter.add();
 
         }
         else {
@@ -96,8 +76,8 @@ public class Main {
 
     }
 
-    static void showAnimals(HashSet<Animal> zoo) {
-        System.out.println("In the zoo, there are the following animals:");
+    static void showAnimals(HashSet<Animal> zoo, Counter counter) {
+        System.out.println("In the zoo, there are the following animals (total: " + counter.getCounter() + "):");
         for (Animal animal : zoo) {
             animal.generalInfo();
             animal.showCommands();
@@ -143,26 +123,23 @@ public class Main {
         }
     }
 
-    static void run(String[] options, HashSet<Animal> zoo) {
+    static void run(String[] options, HashSet<Animal> zoo) throws Exception {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.println("Navigation menu".toUpperCase());
             printMenu(options);
-            try {
+            try (Counter counter = new Counter()) {
                 int option = scanner.nextInt();
                 switch (option) {
-                    case 1 -> addAnimalToZoo(zoo);
-                    case 2 -> showAnimals(zoo);
+                    case 1 -> addAnimalToZoo(zoo, counter);
+                    case 2 -> showAnimals(zoo, counter);
                     case 3 -> teachNewCommand(zoo);
                     case 4 -> showLearnedCommands(zoo);
                     case 5 -> exit(0);
                 }
-            } catch (InputMismatchException ex) {
-                System.out.println("Please enter correct value!");
-                scanner.next();
-            } catch (Exception ex) {
-                System.out.println("An unexpected error happened. Please try again!");
-                scanner.next();
+            }
+            catch (Exception e) {
+                System.out.println("Incorrect input!");
             }
         }
     }
